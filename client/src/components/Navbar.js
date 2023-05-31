@@ -13,12 +13,12 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import companyInformation from '../constants/companyInformation'
 import menuItems from '../constants/menuItems'
-import BasicDateCalendar from './AttendanceCalendar'
+import NavLink from './NavLink'
 
 
 const drawerWidth = 240;
 
-export default function Navbar() {
+export default function Navbar(props) {
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
@@ -42,14 +42,15 @@ export default function Navbar() {
         <Box sx={{ overflow: 'auto' }}>
           <List>
             {menuItems.map((item, index) => (
-              <ListItem key={item.name} disablePadding>
-                <ListItemButton>
-                  <ListItemIcon>
-                    {item.icon}
-                  </ListItemIcon>
-                  <ListItemText primary={item.name} />
-                </ListItemButton>
-              </ListItem>
+                <ListItem key={item.name} to={item.href} component={NavLink} disablePadding style={{textDecoration: "inherit", color:"inherit"}}>
+                        <ListItemButton>
+                        <ListItemIcon>
+                            {item.icon}
+                        </ListItemIcon>
+                        <ListItemText primary={item.name} />
+                        </ListItemButton>
+                    
+                </ListItem>
             ))}
           </List>
           <Divider />
@@ -69,7 +70,7 @@ export default function Navbar() {
       </Drawer>
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <Toolbar />
-        <BasicDateCalendar />
+         {props.children}
       </Box>
     </Box>
   );

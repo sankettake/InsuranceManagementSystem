@@ -2,19 +2,23 @@ import { Inbox, CalendarMonth, Queue, AccountTree } from '@mui/icons-material';
 const menuItems = [
     {
         "name": "Attendance",
-        "icon": <CalendarMonth />
+        "icon": <CalendarMonth />,
+        "href": "/attendance"
     },
     {
         "name": "Leave Request",
-        "icon": <Queue />
+        "icon": <Queue />,
+        "href": "/leave"
     },
     {
         "name": "Inbox",
-        "icon": <Inbox />
+        "icon": <Inbox />,
+        "href": "/inbox"
     },
     {
         "name": "Directory",
-        "icon": <AccountTree />
+        "icon": <AccountTree />,
+        "href": "/directory"
     }
 ]
 

@@ -45,7 +45,7 @@ function App() {
         <Fragment>
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <CssBaseline />
-            <Home />
+              <Home />
           </LocalizationProvider> 
         </Fragment>
       </RouterProvider>

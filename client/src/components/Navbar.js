@@ -43,17 +43,21 @@ export default function Navbar(props) {
         <Toolbar />
         <Box sx={{ overflow: 'auto' }}>
             <List>
-            {menuItems.map((item, index) => (
-                <ListItem key={item.name} to={item.href} component={NavLink} disablePadding style={{textDecoration: "inherit", color:"inherit"}}>
-                        <ListItemButton>
-                        <ListItemIcon>
-                            {item.icon}
-                        </ListItemIcon>
-                        <ListItemText primary={item.name} secondary={item.name === "Inbox"? `(${requests.length})` : ""}/>
-                        </ListItemButton>
-                    
+            {menuItems.map((item, index) => {
+                console.log(requests)
+                const menuName = item.name + (item.name === "Inbox"? ` (${requests.length})` : "")
+                return (<ListItem key={item.name} to={item.href} component={NavLink} disablePadding style={{textDecoration: "inherit", color:"inherit"}}>
+                <ListItemButton>
+                <ListItemIcon>
+                    {item.icon}
+                </ListItemIcon>
+                <ListItemText primary={menuName} />
+                </ListItemButton>
+
                 </ListItem>
-            ))}
+                )
+            }
+            )}
             </List>
             <Divider />
             {/* <List>

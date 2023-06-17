@@ -11,6 +11,7 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import SendIcon from '@mui/icons-material/Send';
 import { useDispatch} from 'react-redux'
+import { add } from '../store/requests';
 
 const LeaveRequest = () => {
     const [requestType, setRequestType] = React.useState('');
@@ -31,7 +32,7 @@ const LeaveRequest = () => {
         console.log(requestType, reason)
         const duration = toValue.diff(fromValue, 'day')
         const random = Math.floor(Math.random() * 10000)
-        dispatch({type:"ADD", payload: {id: random, type: requestType, user:"Sanket", duration, from: fromValue.format('DD MMM'), to: toValue.format('DD MMM'), reason }})
+        dispatch(add({id: random, type: requestType, user:"Sanket", duration, from: fromValue.format('DD MMM'), to: toValue.format('DD MMM'), reason }))
     }
     const onReasonChange = (event) => {
         setReason(event.target.value);

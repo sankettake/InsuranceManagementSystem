@@ -24,7 +24,7 @@ export default function Navbar(props) {
       <CssBaseline />
       <AppBar position="fixed" sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}>
         <Toolbar>
-            <img src="619.ico" alt="logo" style={{maxWidth: "40px"}}/>
+            <img src="/619.ico" alt="logo" style={{maxWidth: "40px"}}/>
           <Typography variant="h6" noWrap component="div" sx={{marginLeft: "10px"}}>
             {companyInformation.name}
           </Typography>

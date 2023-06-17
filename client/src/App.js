@@ -22,7 +22,11 @@ const router = createBrowserRouter([
     children: [
       { path: '/attendance', element: <BasicDateCalendar />},
       { path: '/leave', element: <LeaveRequest />},
-      { path: '/inbox', element: <Inbox />},
+      { path: '/inbox', element: <Inbox />,
+        children: [
+          { path: ':requestId', element: <Inbox />},
+        ]
+      },
       { path: '/directory', element: <Directory />}
     ]
   },

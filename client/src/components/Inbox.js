@@ -4,6 +4,8 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { useEffect } from 'react';
+import { useParams, useNavigate } from 'react-router-dom'
 
 const RequestData = [
     {
@@ -55,16 +57,23 @@ const RequestData = [
 
 const Inbox = () => {
   const [expanded, setExpanded] = React.useState(false);
-
+  const params = useParams()
+  const navigate = useNavigate()
+  
+  useEffect(()=>{
+    setExpanded(params.requestId ? parseInt(params.requestId): RequestData[0].id)
+  },[params])
+//   console.log(expanded)
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
+    navigate(`/inbox/${panel}`)
   };
 
   return (
     <div>
         {
             RequestData.length && RequestData.map(request => {
-                return (<Accordion expanded={expanded === request.id} onChange={handleChange(request.id)}>
+                return (<Accordion key={request.id} expanded={expanded === request.id} onChange={handleChange(request.id)}>
                 <AccordionSummary
                   expandIcon={<ExpandMoreIcon />}
                 //   aria-controls="panel4bh-content"

@@ -2,6 +2,7 @@ const express = require("express")
 const router = express.Router()
 const Policy = require("../models/policy")
 const ToDo = require('../models/toDo')
+const Request = require('../models/request')
 const db = require("../connection")
 
 router.use((req,res,next) => {
@@ -79,5 +80,43 @@ router.get('/todo', getTodos)
 router.get('/todo:id', getToDo)
 router.post('/todo', postToDo)
 router.delete('/todo/:id', deleteToDo)
+
+
+
+const getRequests = async (req,res,next) => {
+  const requests = await Request.find()
+  res.send(requests)
+}
+
+const getRequest = async (req,res,next) => {
+  const request = await Request.findById(req.params.id)
+  res.send(request)
+}
+
+const postRequest = async (req,res,next) => {
+  const request = new Request(req.body);
+  try {
+      await request.save();
+      res.send(request);
+    } catch (error) {
+      res.status(500).send(error);
+    }
+}
+
+const deleteRequest = async (req, res, next) =>{
+  try {
+    const data = await Request.findByIdAndDelete(req.params.id)
+    res.send(data);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+}
+
+
+router.get('/request', getRequests)
+router.get('/request:id', getRequest)
+router.post('/request', postRequest)
+router.delete('/request/:id', deleteRequest)
+
 
 module.exports = router

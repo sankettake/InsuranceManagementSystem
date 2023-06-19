@@ -29,7 +29,6 @@ const LeaveRequest = () => {
     }
     const onSubmitHandler = (event) => {
         event.preventDefault()
-        console.log(requestType, reason)
         const duration = toValue.diff(fromValue, 'day')
         const random = Math.floor(Math.random() * 10000)
         dispatch(add({id: random, type: requestType, user:"Sanket", duration, from: fromValue.format('DD MMM'), to: toValue.format('DD MMM'), reason }))

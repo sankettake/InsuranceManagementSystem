@@ -44,7 +44,6 @@ export default function Navbar(props) {
         <Box sx={{ overflow: 'auto' }}>
             <List>
             {menuItems.map((item, index) => {
-                console.log(requests)
                 const menuName = item.name + (item.name === "Inbox"? ` (${requests.length})` : "")
                 return (<ListItem key={item.name} to={item.href} component={NavLink} disablePadding style={{textDecoration: "inherit", color:"inherit"}}>
                 <ListItemButton>

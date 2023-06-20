@@ -13,10 +13,10 @@ const Inbox = () => {
   const [expanded, setExpanded] = React.useState(false);
   const params = useParams()
   const navigate = useNavigate()
-  const requests = useSelector(state => state.requests)
+  const requests = useSelector(state => state.requests.requests)
   
   useEffect(()=>{
-    setExpanded(params.requestId ? params.requestId: requests[0]._id)
+    setExpanded(params.requestId ? params.requestId: requests[0]?._id)
   },[params, requests])
 //   console.log(expanded)
   const handleChange = (panel) => (event, isExpanded) => {
@@ -27,7 +27,7 @@ const Inbox = () => {
   return (
     <div>
         {
-            requests.length && requests.map(request => {
+            requests && requests.map(request => {
                 return (<Accordion key={request._id} expanded={expanded === request._id} onChange={handleChange(request._id)}>
                 <AccordionSummary
                   expandIcon={<ExpandMoreIcon />}

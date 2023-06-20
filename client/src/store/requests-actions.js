@@ -12,7 +12,6 @@ export const getRequests = () => {
             
             if (response.status === 200){
                 const jsonData = await response.json();
-                console.log(jsonData);
                 dispatch(replaceRequests(jsonData))
             }
         }

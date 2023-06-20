@@ -20,7 +20,7 @@ import {useSelector} from 'react-redux'
 const drawerWidth = 240;
 
 export default function Navbar(props) {
-    const requests = useSelector(state => state.requests)
+    const requests = useSelector(state => state.requests.requests)
     return (
     <Box sx={{ display: 'flex' }}>
         <CssBaseline />

@@ -8,6 +8,10 @@ const RequestSchema = new Schema({
         type: String,
         required:  [true, 'The Request type text field is required'],
     },
+    user: {
+        type: String,
+        required:  [true, 'The Request user text field is required'],
+    },
     reason: {
         type: String,
         required:  [true, 'The Request reason text field is required'],

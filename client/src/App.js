@@ -2,7 +2,7 @@ import './App.css';
 import themeLight from './theme/theme'
 import themeDark from './theme/themeDark'
 import { CssBaseline, ThemeProvider} from '@mui/material';
-import {Fragment, useMemo} from 'react'
+import {Fragment, useMemo, useEffect} from 'react'
 import Home from './components/Home';
 import useMediaQuery from '@mui/material/useMediaQuery'
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
@@ -13,6 +13,8 @@ import Directory from './components/Directory';
 import Inbox from './components/Inbox';
 import LeaveRequest from './components/LeaveRequest';
 import ErrorPage from './components/ErrorPage';
+import { useDispatch } from 'react-redux'
+import { getRequests } from './store/requests-actions';
 
 const router = createBrowserRouter([
   { 
@@ -39,6 +41,12 @@ function App() {
   
   const theme = useMemo(() =>  preferedMode ? themeDark : themeLight,[preferedMode])
 
+  const dispatch = useDispatch()
+
+  useEffect(()=>{
+    dispatch(getRequests())
+  }, [dispatch])
+  
   return (
     <ThemeProvider theme={theme}>
       <RouterProvider router={router}>

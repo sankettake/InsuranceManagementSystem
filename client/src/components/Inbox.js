@@ -16,7 +16,7 @@ const Inbox = () => {
   const requests = useSelector(state => state.requests)
   
   useEffect(()=>{
-    setExpanded(params.requestId ? parseInt(params.requestId): requests[0].id)
+    setExpanded(params.requestId ? params.requestId: requests[0]._id)
   },[params, requests])
 //   console.log(expanded)
   const handleChange = (panel) => (event, isExpanded) => {
@@ -28,7 +28,7 @@ const Inbox = () => {
     <div>
         {
             requests.length && requests.map(request => {
-                return (<Accordion key={request.id} expanded={expanded === request.id} onChange={handleChange(request.id)}>
+                return (<Accordion key={request._id} expanded={expanded === request._id} onChange={handleChange(request._id)}>
                 <AccordionSummary
                   expandIcon={<ExpandMoreIcon />}
                 //   aria-controls="panel4bh-content"

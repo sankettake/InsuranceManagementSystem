@@ -3,7 +3,8 @@ const router = express.Router()
 const Policy = require("../models/policy")
 const ToDo = require('../models/toDo')
 const Request = require('../models/request')
-const db = require("../connection")
+const Note = require('../models/note')
+const User = require('../models/user')
 
 router.use((req,res,next) => {
     console.log("Time: ",Date.now())
@@ -81,6 +82,74 @@ router.get('/todo:id', getToDo)
 router.post('/todo', postToDo)
 router.delete('/todo/:id', deleteToDo)
 
+const getNotes = async (req,res,next) => {
+  const notes = await Note.find()
+  res.send(notes)
+}
+
+const getNote = async (req,res,next) => {
+  const note = await Note.findById(req.params.id)
+  res.send(note)
+}
+
+const postNote = async (req,res,next) => {
+  const note = new Note(req.body);
+  try {
+      await note.save();
+      res.send(note);
+    } catch (error) {
+      res.status(500).send(error);
+    }
+}
+
+const deleteNote = async (req, res, next) =>{
+  try {
+    const data = await Note.findByIdAndDelete(req.params.id)
+    res.send(data);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+}
+
+
+router.get('/notes', getNotes)
+router.get('/note:id', getNote)
+router.post('/note', postNote)
+router.delete('/note/:id', deleteNote)
+
+const getUsers = async (req,res,next) => {
+  const users = await User.find()
+  res.send(users)
+}
+
+const getUser = async (req,res,next) => {
+  const user = await User.findById(req.params.id)
+  res.send(user)
+}
+
+const postUser = async (req,res,next) => {
+  const user = new User(req.body);
+  try {
+      await user.save();
+      res.send(user);
+    } catch (error) {
+      res.status(500).send(error);
+    }
+}
+
+const deleteUser = async (req, res, next) =>{
+  try {
+    const data = await User.findByIdAndDelete(req.params.id)
+    res.send(data);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+}
+
+router.get('/users', getUsers)
+router.get('/user:id', getUser)
+router.post('/user', postUser)
+router.delete('/user/:id', deleteUser)
 
 
 const getRequests = async (req,res,next) => {

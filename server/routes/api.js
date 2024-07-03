@@ -5,9 +5,11 @@ const ToDo = require('../models/toDo')
 const Request = require('../models/request')
 const Note = require('../models/note')
 const User = require('../models/user')
+const Template = require('../models/template')
 
-router.use((req,res,next) => {
+router.use(async (req,res,next) => {
     console.log("Time: ",Date.now())
+    await new Promise(resolve => setTimeout(resolve, 2000));
     next()
 })
 
@@ -150,6 +152,40 @@ router.get('/users', getUsers)
 router.get('/user:id', getUser)
 router.post('/user', postUser)
 router.delete('/user/:id', deleteUser)
+
+const getTemplates = async (req,res,next) => {
+  const templates = await Template.find()
+  res.send(templates)
+}
+
+const getTemplate = async (req,res,next) => {
+  const template = await Template.findById(req.params.id)
+  res.send(template)
+}
+
+const postTemplate = async (req,res,next) => {
+  const template = new Template(req.body);
+  try {
+      await template.save();
+      res.send(template);
+    } catch (error) {
+      res.status(500).send(error);
+    }
+}
+
+const deleteTemplate = async (req, res, next) =>{
+  try {
+    const data = await Template.findByIdAndDelete(req.params.id)
+    res.send(data);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+}
+
+router.get('/templates', getTemplates)
+router.get('/template:id', getTemplate)
+router.post('/template', postTemplate)
+router.delete('/template/:id', deleteTemplate)
 
 
 const getRequests = async (req,res,next) => {
